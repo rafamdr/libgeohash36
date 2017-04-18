@@ -32,7 +32,5 @@ int main()
 
    printf("The Lat/Long of %s is: (%lf, %lf)\n", geohash36_buffer, outLatitude, outLongitude);
 
-   getchar();
-
    return 0;
 }
