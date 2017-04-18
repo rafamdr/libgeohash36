@@ -1,8 +1,26 @@
 # libgeohash36
 
-A pure C implementation of Geohash-36
+A pure C implementation of Geohash-36.
 
----
+Geohash-36 encoder creates a hash based in base-36 characters which represents a coordinate (latitude and longitude).
+
+Example:  the coordinate {51.504444, -0.086666}  produces **bdrdC26BqH**
+
+See this location here: http://geo36.org/bdrdC26BqH
+
+
+## More about Geohash-36
+
+[1] http://geohash.org/
+
+[2] http://en.wikipedia.org/wiki/Geohash
+
+[2] http://en.wikipedia.org/wiki/Geohash-36
+
+[3] http://geo36.org/
+
+
+## Usage
 
 **int geohash36_encode(double latitude_, double longitude_, char * outBuffer_, int numCharacters_);**
 
@@ -52,3 +70,22 @@ Example:
    
    //Output: lat_prec = 0.165480; long_prec = 0.330961;
 ```
+
+
+## Contributing
+
+1. Fork it ( https://github.com/rafamdr/libgeohash36/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
+
+
+## Author
+
+* [Rafael Ribeiro](https://github.com/rafamdr)
+
+
+## Copyright & License
+
+Please refer to the COPYING.md and LICENSE.md file.
