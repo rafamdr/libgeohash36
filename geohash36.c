@@ -319,8 +319,8 @@ void geohash36_getPrecisionInMeters(int numCharacters_, double * lat_prec, doubl
  * @param [in] direction_: code to indicate the direction of neighbor. See header file to view expected codes.
  ************************************************************************************************************************
  * @return Initialize result code.
- * @retval  0  - Everything worked;
- * @retval -1  - Fail to decode due invalid input.
+ * @retval  outBuffer_  - Everything worked;
+ * @retval NULL         - Fail to decode due invalid input.
  ************************************************************************************************************************
  **/
 char * geohash36_getNeighbor(char * buffer_, int bufferSize_, char * outBuffer_, uint16_t direction_)
