@@ -97,7 +97,7 @@ static int geohash36_fastPow(int base_, uint32_t exp_)
    int output = 1;
 
    if (exp_ == 0)
-      output;
+      return output;
 
    while(exp_ > 0)
    {
@@ -119,7 +119,7 @@ static int geohash36_fastPow(int base_, uint32_t exp_)
 * @return None.
 ************************************************************************************************************************
 **/
-static void geohash36_charToIndexes(char c_, int * line_, int * col_)
+static void geohash36_charToIndexes(char c_, int8_t * line_, int8_t * col_)
 {
    (*line_) = -1;
    (*col_) = -1;
@@ -189,6 +189,9 @@ int geohash36_encode(double latitude_, double longitude_, char * outBuffer_, int
    int latIdx = 0, longIdx = 0;
    double slice;
    int outbuffer_count = 0;
+    
+   if(outBuffer_ == NULL)
+       return 0;
 
    while (numCharacters_ > 0)
    {
@@ -255,8 +258,11 @@ int geohash36_decode(char * buffer_, int bufferSize_, double * outLatitude_, dou
 
    double lat[] = { -90.0,  90.0  };
    double lon[] = { -180.0, 180.0 };
-   int latLine, longCol;
+   int8_t latLine, longCol;
    double slice;
+    
+   if((buffer_ == NULL) || (outLatitude_ == NULL) || (outLongitude_ == NULL))
+      return -1;
 
    for (int i = 0; i < bufferSize_; i++)
    {
@@ -301,4 +307,54 @@ void geohash36_getPrecisionInMeters(int numCharacters_, double * lat_prec, doubl
 
    (*lat_prec) = (90 / (double)geohash36_fastPow(GEOHASH_MATRIX_SIDE, numCharacters_)) * one_grade_in_meters;
    (*long_prec) = (*lat_prec) * 2;
+}
+
+/*!
+ ************************************************************************************************************************
+ * @brief Gets a neighbor Geohash-36 given a input hash and a direction (north, northeast, etc).
+ ************************************************************************************************************************
+ * @param [in] buffer_: input buffer which contains a Geohash-36 string;
+ * @param [in] bufferSize_: "buffer_" length;
+ * @param [out] outBuffer_: pointer of string buffer which will receive the Geohash-36 neighbor;
+ * @param [in] direction_: code to indicate the direction of neighbor. See header file to view expected codes.
+ ************************************************************************************************************************
+ * @return Initialize result code.
+ * @retval  0  - Everything worked;
+ * @retval -1  - Fail to decode due invalid input.
+ ************************************************************************************************************************
+ **/
+char * geohash36_getNeighbor(char * buffer_, int bufferSize_, char * outBuffer_, uint16_t direction_)
+{
+   int8_t lat_diff, long_diff;
+   int8_t latLine, longCol;
+   
+   if((buffer_ == NULL) || (bufferSize_ == 0) || (outBuffer_ == NULL))
+      return NULL;
+    
+   geohash36_charToIndexes(buffer_[bufferSize_ - 1], &latLine, &longCol);
+   
+   if(latLine == -1)
+      return NULL;
+   
+   lat_diff  = (int8_t)(direction_ >> 8);
+   long_diff = (int8_t)(direction_);
+   
+   latLine += lat_diff;
+   longCol += long_diff;
+   
+   if(latLine < 0)
+      latLine = GEOHASH_MATRIX_SIDE - 1;
+   else
+      latLine %= GEOHASH_MATRIX_SIDE;
+   
+   if(longCol < 0)
+      longCol = GEOHASH_MATRIX_SIDE - 1;
+   else
+      longCol %= GEOHASH_MATRIX_SIDE;
+      
+   memcpy(outBuffer_, buffer_, bufferSize_);
+   
+   outBuffer_[bufferSize_ - 1] = base36[latLine][longCol];
+   
+   return outBuffer_;
 }
