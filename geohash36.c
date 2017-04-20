@@ -339,18 +339,8 @@ char * geohash36_getNeighbor(char * buffer_, int bufferSize_, char * outBuffer_,
    lat_diff  = (int8_t)(direction_ >> 8);
    long_diff = (int8_t)(direction_);
    
-   latLine += lat_diff;
-   longCol += long_diff;
-   
-   if(latLine < 0)
-      latLine = GEOHASH_MATRIX_SIDE - 1;
-   else
-      latLine %= GEOHASH_MATRIX_SIDE;
-   
-   if(longCol < 0)
-      longCol = GEOHASH_MATRIX_SIDE - 1;
-   else
-      longCol %= GEOHASH_MATRIX_SIDE;
+   latLine = (latLine + lat_diff) % GEOHASH_MATRIX_SIDE;
+   longCol = (longCol + long_diff) % GEOHASH_MATRIX_SIDE;
       
    memcpy(outBuffer_, buffer_, bufferSize_);
    
