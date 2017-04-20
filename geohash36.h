@@ -31,28 +31,35 @@ Defines/macros
 ************************************************************************************************************************
 * @brief Default codes to set which direction will used when we process neighbors.
  
-(-1,-1)  (-1, 0)  (-1,+1)
-( 0,-1)  ( 0, 0)  ( 0,+1)
-(+1,-1)  (+1, 0)  (-1,+1)
+'2', '3', '4', '5', '6', '7',
+'8', '9', 'b', 'B', 'C', 'd',
+'D', 'F', 'g', 'G', 'h', 'H',
+'j', 'J', 'K', 'l', 'L', 'M',
+'n', 'N', 'P', 'q', 'Q', 'r',
+'R', 't', 'T', 'V', 'W', 'X'
+ 
+(+5,+5)  (+5, 0)  (+5,+1)
+( 0,+5)  ( 0, 0)  ( 0,+1)
+(+1,+5)  (+1, 0)  (+1,+1)
 
-(-1,-1) 0xFFFF -> Northwest
-(-1, 0) 0xFF00 -> North
-(-1,+1) 0xFF01 -> Northeast
-( 0,-1) 0x00FF -> West
+(+5,+5) 0x0505 -> Northwest
+(+5, 0) 0x0500 -> North
+(+5,+1) 0x0501 -> Northeast
+( 0,+5) 0x0005 -> West
 ( 0, 0) 0x0000 -> Center
 ( 0,+1) 0x0001 -> East
-(+1,-1) 0x01FF -> Southwest
+(+1,+5) 0x0105 -> Southwest
 (+1, 0) 0x0100 -> South
-(+1,+1) 0xFF01 -> Southeast
+(+1,+1) 0x0101 -> Southeast
 ************************************************************************************************************************
 **/
-#define GEO36_NEIGHBORS_DIR_NORTHWEST     0xFFFF
-#define GEO36_NEIGHBORS_DIR_NORTH         0xFF00
-#define GEO36_NEIGHBORS_DIR_NORTHEAST     0xFF01
-#define GEO36_NEIGHBORS_DIR_WEST          0x00FF
+#define GEO36_NEIGHBORS_DIR_NORTHWEST     0x0505
+#define GEO36_NEIGHBORS_DIR_NORTH         0x0500
+#define GEO36_NEIGHBORS_DIR_NORTHEAST     0x0501
+#define GEO36_NEIGHBORS_DIR_WEST          0x0005
 #define GEO36_NEIGHBORS_DIR_CENTER        0x0000
 #define GEO36_NEIGHBORS_DIR_EAST          0x0001
-#define GEO36_NEIGHBORS_DIR_SOUTHWEST     0x01FF
+#define GEO36_NEIGHBORS_DIR_SOUTHWEST     0x0105
 #define GEO36_NEIGHBORS_DIR_SOUTH         0x0100
 #define GEO36_NEIGHBORS_DIR_SOUTHEAST     0x0101
 
