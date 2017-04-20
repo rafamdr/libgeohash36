@@ -71,6 +71,22 @@ Example:
    //Output: lat_prec = 0.165480; long_prec = 0.330961;
 ```
 
+---
+
+**char * geohash36_getNeighbor(char * buffer_, int bufferSize_, char * outBuffer_, uint16_t direction_);**
+
+Gets a neighbor Geohash-36 given a input hash and a direction (north, northeast, etc).
+
+Example:
+```C
+   const char geohash36_buffer[] = "bdrdC26BqH";
+   int num_chars = sizeof(geohash36_buffer) - 1;
+   char geohash36_buffer_neighbor[num_chars];
+   
+   geohash36_getNeighbor(geohash36_buffer, num_chars, geohash36_buffer_neighbor, GEO36_NEIGHBORS_DIR_NORTHEAST));
+   
+   //Output: geohash36_buffer_neighbor = "bdrdC26Bq8";
+```
 
 ## Contributing
 
