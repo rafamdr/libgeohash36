@@ -6,18 +6,14 @@ Geohash-36 encoder creates a hash based in base-36 characters which represents a
 
 Example:  the coordinate {51.504444, -0.086666}  produces **bdrdC26BqH**
 
-See this location here: http://geo36.org/bdrdC26BqH
-
 
 ## More about Geohash-36
 
-[1] http://geohash.org/
+[1] http://en.wikipedia.org/wiki/Geohash-36
 
 [2] http://en.wikipedia.org/wiki/Geohash
 
-[2] http://en.wikipedia.org/wiki/Geohash-36
-
-[3] http://geo36.org/
+[3] http://geohash.org/
 
 
 ## Usage
